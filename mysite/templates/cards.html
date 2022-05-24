@@ -1,0 +1,34 @@
+<!-- The content page extends our base template -->
+{% extends 'index.html' %}
+
+<!-- Fill in the title -->
+{% block title %} AR Greeting Cards {% endblock %}
+{% block content %}
+    <h1>AR Greeting Cards</h1>
+
+    <hr />
+
+    <p>Please select one of our fancy AR cards:</p>
+
+    <p>
+    <!-- Create a div-tag for every card in the cards collection -->
+    <div class="container">
+    <div class="cards" id="cards">
+      <div class="d-flex justify-content-between">
+        <h1>Cards</h1>
+        <p style="color:red; font-weight: 400;">See Cards</p>
+            </div>
+            {% for card in cards %}
+            <!-- Show the title for every card -->
+            <div class="card">
+                <img src="images/card-pictures/gift-card.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <div>{{ card['title'] }}</div>
+                <p>Gift Card</p>
+                <p class="card-text">this is a card</p>
+            </div>
+            {% endfor %}
+    </div>
+    </div>
+    </p>
+{% endblock %}

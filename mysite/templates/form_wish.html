@@ -1,0 +1,67 @@
+<!-- The content page extends our base template -->
+{% extends 'index.html' %}
+
+<!-- Fill in the title -->
+{% block title %} Add New Wish {% endblock %}
+
+{% block content %}
+    <h1>Add New Wish</h1>
+
+    <hr />
+
+    <p>Please fill in this form:</p>
+
+    <p>
+    <form action="/wish_insert" method="post">
+        <div class="form-group">
+            <label for="sender">From:</label>
+            <input type="text" class="form-control" id="sender" name="sender">
+        </div>
+        <div class = "form-group">
+            <label for="receiver">To:</label>
+            <input type="text" class="form-control" id="receiver" name="receiver">
+        </div>    
+        <div class="form-group">
+          <label for="message">Message:</label>
+          <textarea class="form-control" rows="5" id="message" name="message"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="cardid">Greeting card:</label>
+          <select class="form-control" id="cardid" name="cardid">
+            <option value="0">-- Select a greeting card --</option>
+            {% for card in cards %}
+                <!-- Show the title for every card -->
+                <option value="{{ card['cardid'] }}">{{ card['title'] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+            <label for="giftMethod">Send with:</label>
+            <select class="form-control" onchange="myFunction()" name="giftMethod" id="giftMethod">
+              <option value=0>-- Select how you would like to send the gift card --</option>
+              <option value="Postal Service">Postal Service</option>
+              <option value="Email">Email</option>
+            </select>
+        </div>
+
+        <div id="Email" class="form-group">
+            <label  for="receiver_email">Receivers Email</label>
+            <input type="text" id="receiver_email" name="receiver_email">
+        </div>
+        
+        <script>
+          function myFunction() {
+                      
+                      if (document.getElementById("giftMethod").selectedIndex == "1") {
+                        document.getElementById("Email").style.display = "None"
+                      }
+                      if (document.getElementById("giftMethod").selectedIndex == "2") {
+                          document.getElementById("Email").style.display = "Block"
+                                  }
+                      }
+        </script>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </p>
+{% endblock %}

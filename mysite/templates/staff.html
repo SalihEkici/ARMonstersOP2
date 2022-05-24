@@ -1,0 +1,11 @@
+<!-- The content page extends our base template -->
+{% extends 'index.html' %}
+
+<!-- Fill in the title -->
+{% block title %} Our Staff {% endblock %}
+{% block content %}
+<h1>Here is our staff:</h1>
+{% for staff in staff_list%}
+<p>Name: {{staff["fullName"]}} <br> Email: {{staff["email"]}} <br> Github: {{staff["github"]}}</p>
+{% endfor %}
+{% endblock %}

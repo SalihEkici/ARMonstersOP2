@@ -1,0 +1,13 @@
+<!-- The content page extends our base template -->
+{% extends 'index.html' %}
+
+<!-- Fill in the title -->
+{% block title %} AR Greeting Cards {% endblock %}
+{% block content %}
+<h1>Wishes</h1>
+<div>
+    {%for wish in wishes%}
+    <p>Card ID:  {{wish['cardid']}} <br> Message:  {{wish['message']}} <br> Sender: {{wish['sender']}} <br>Sent to:  {{wish['receiver']}}</p>
+    {% endfor %}
+</div>
+{% endblock %}
