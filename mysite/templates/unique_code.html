@@ -1,0 +1,13 @@
+<!-- The content page extends our base template -->
+{% extends 'base.html' %}
+
+<!-- Fill in the title -->
+{% block title %}Enter your unique code{% endblock %}
+{% block content %}
+<form action="get_card" method="post">
+    <div>
+        <label for="code">Enter your code:</label>
+        <input type="text" id="code" name="code">
+    </div>
+</form>
+{% endblock %}

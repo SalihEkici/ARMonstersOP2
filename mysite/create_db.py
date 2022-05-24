@@ -1,9 +1,15 @@
 # import the sqlite3 library to work with SQLite databases in Python
 import sqlite3
 
+
+ 
 # connect and open the database file database.db, the database will be created when it does not exists
 conn = sqlite3.connect('database.db')
 print("Opened database successfully")
+#drop tables
+conn.execute("DROP TABLE IF EXISTS card")
+conn.execute("DROP TABLE IF EXISTS wish")
+conn.execute("DROP TABLE IF EXISTS staff")
 
 # create a new table card with two columns:
 # the first column cardid is the primary key and autoincrement
@@ -23,7 +29,7 @@ print("Cards inserted successfully")
 # the second column contains the sender of the wishes
 # the third column contains the message from the sender
 # the fourth column contains the id of the card
-conn.execute('CREATE TABLE wish (wishid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, sender TEXT, message TEXT, cardid INTEGER, receiver TEXT)')
+conn.execute('CREATE TABLE wish (wishid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, sender TEXT, message TEXT, cardid INTEGER, receiver TEXT, code TEXT)')
 # there are no wishes already sent, so the table stays empty
 print("Table wish created successfully")
 
@@ -35,3 +41,4 @@ conn.commit()
 
 # close the connection
 conn.close()
+

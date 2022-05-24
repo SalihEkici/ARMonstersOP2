@@ -1,8 +1,11 @@
 # A very simple Flask Hello World app for you to get started with...
+import code
 import key
 from flask import Flask,render_template, jsonify, request
 import requests
 import sqlite3
+import string
+import random
 
 app = Flask(__name__)
 
@@ -45,6 +48,9 @@ def wish_list():
 
 @app.route('/wish_insert', methods=['POST'])
 def wish_insert():
+    S = 8  # number of characters in the string.  
+    # call random.choices() string module to find the string in Uppercase + numeric data.  
+    random_access_code = ''.join(random.choices(string.ascii_uppercase + string.digits, k = S))    
     sender = request.form.get("sender")
     message = request.form.get("message")
     cardid = request.form.get("cardid")
@@ -53,20 +59,24 @@ def wish_insert():
     giftMethod = request.form.get("giftMethod")
     # connect and open the database file database.db
     conn = sqlite3.connect('database.db')
-    conn.execute(f"INSERT INTO wish (cardid,sender,receiver,message) VALUES ('{cardid}','{sender}', '{receiver}', '{message}')")
+    conn.execute(f"INSERT INTO wish (cardid,sender,receiver,message,code) VALUES ('{cardid}','{sender}', '{receiver}', '{message}','{random_access_code}')")
     # commit the new row to the database, otherwise it will be lost
     conn.commit()
     # close the connection
     conn.close()
-    if(giftMethod == "Email"):
+    
+    
+    #send email with data from form
+    if giftMethod == "2":    
         requests.post(
-            "https://api.mailgun.net/v3/sandbox784cba45b781488ba33c9e360d748f81.mailgun.org/messages",
-            auth=("api", key.API),
-            data={"from": "ARMonster@armonster.com",
-                "to": receiver_email,
-                "subject": "Hello",
-                "text": message})
-            
+            "https://api.mailgun.net/v3/sandbox6f8b2699467b4c70822f3693c7ac5877.mailgun.org/messages",
+            auth=("api", "5d0ae248efa80711e3d556146a12376d-8d821f0c-4fc5a289"),
+            data={"from": "salih@ARMonsters.mailgun.com",
+            "to": receiver_email,
+            "subject": "You have received a greeting card from " + sender ,
+            "text": message + "\nAccess code = " + random_access_code})
+
+
     return render_template('wish_confirmation.html')
 
 @app.route('/staff')
@@ -79,6 +89,19 @@ def staff_list():
     conn.close()
     return render_template('staff.html', staff_list = staff_list)
 
+@app.route('/unique_code')
+def unique_code():
+    return render_template('unique_code.html')
 
+@app.route('/get_card', methods=['POST'])
+def show_message():
+    unique_code = request.form.get("unique_code")
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+    message = cur.execute(f"SELECT message from wish where '{unique_code}' = code")
+    conn.commit()
+    conn.close()
+    return render_template("message.html", unique_code = unique_code, message = message)
 if __name__ == "__main__":
     app.run(debug=True)

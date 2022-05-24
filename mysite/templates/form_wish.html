@@ -1,5 +1,5 @@
 <!-- The content page extends our base template -->
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 <!-- Fill in the title -->
 {% block title %} Add New Wish {% endblock %}
@@ -12,14 +12,14 @@
     <p>Please fill in this form:</p>
 
     <p>
-    <form name="wishForm" action="/wish_insert" onsubmit="return validateForm" method="post">
-        <div class="form-group">
+    <form name="wishForm" onsubmit="return validateForm()" action="/wish_insert" method="post">
+        <div  class="form-group">
             <label for="sender"> <span style="color: red;">*</span>From:</label>
-            <input type="text" class="form-control" id="sender" name="sender">
+            <input type="text" required class="form-control" id="sender" name="sender">
         </div>
         <div class = "form-group">
             <label for="receiver"><span style="color: red;">*</span>To:</label>
-            <input type="text" class="form-control" id="receiver" name="receiver">
+            <input type="text" required class="form-control" id="receiver" name="receiver">
         </div>    
         <div class="form-group">
           <label for="message">Message:</label>
@@ -37,14 +37,14 @@
         </div>
         <div class="form-group">
             <label for="giftMethod"><span style="color: red;">*</span>Send with:</label>
-            <select class="form-control" onchange="myFunction()" name="giftMethod" id="giftMethod">
+            <select class="form-control" required onchange="myFunction()" name="giftMethod" id="giftMethod">
               <option value=0>-- Select how you would like to send the gift card --</option>
-              <option value="Postal Service">Postal Service</option>
-              <option value="Email">Email</option>
+              <option value="1">Postal Service</option>
+              <option value="2">Email</option>
             </select>
         </div>
 
-        <div id="Email" class="form-group">
+        <div id="Email" class="form-group" style="display: none;">
             <label  for="receiver_email">Receivers Email</label>
             <input type="text" id="receiver_email" name="receiver_email">
         </div>
@@ -53,8 +53,8 @@
               var sender = document.forms["wishForm"]["sender"].value;
               var receiver = document.forms["wishForm"]["receiver"].value;
               var giftMethod = document.forms["wishForm"]["giftMethod"].value;
-              if (sender == "" || receiver == "" || giftMethod == "") {
-                alert("You must fill out all necessary boxes\nFrom\nTo\nSend with");
+              if (sender == "" || receiver == "" || giftMethod == 0) {
+                alert("You must fill out all necessary boxes\nSend with");
                 return false;}
             } 
         </script>
