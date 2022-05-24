@@ -12,13 +12,13 @@
     <p>Please fill in this form:</p>
 
     <p>
-    <form action="/wish_insert" method="post">
+    <form name="wishForm" action="/wish_insert" onsubmit="return validateForm" method="post">
         <div class="form-group">
-            <label for="sender">From:</label>
+            <label for="sender"> <span style="color: red;">*</span>From:</label>
             <input type="text" class="form-control" id="sender" name="sender">
         </div>
         <div class = "form-group">
-            <label for="receiver">To:</label>
+            <label for="receiver"><span style="color: red;">*</span>To:</label>
             <input type="text" class="form-control" id="receiver" name="receiver">
         </div>    
         <div class="form-group">
@@ -36,7 +36,7 @@
           </select>
         </div>
         <div class="form-group">
-            <label for="giftMethod">Send with:</label>
+            <label for="giftMethod"><span style="color: red;">*</span>Send with:</label>
             <select class="form-control" onchange="myFunction()" name="giftMethod" id="giftMethod">
               <option value=0>-- Select how you would like to send the gift card --</option>
               <option value="Postal Service">Postal Service</option>
@@ -48,7 +48,16 @@
             <label  for="receiver_email">Receivers Email</label>
             <input type="text" id="receiver_email" name="receiver_email">
         </div>
-        
+        <script>
+          function validateForm() {
+              var sender = document.forms["wishForm"]["sender"].value;
+              var receiver = document.forms["wishForm"]["receiver"].value;
+              var giftMethod = document.forms["wishForm"]["giftMethod"].value;
+              if (sender == "" || receiver == "" || giftMethod == "") {
+                alert("You must fill out all necessary boxes\nFrom\nTo\nSend with");
+                return false;}
+            } 
+        </script>
         <script>
           function myFunction() {
                       

@@ -1,6 +1,5 @@
 # A very simple Flask Hello World app for you to get started with...
-
-import email
+import key
 from flask import Flask,render_template, jsonify, request
 import requests
 import sqlite3
@@ -50,7 +49,8 @@ def wish_insert():
     message = request.form.get("message")
     cardid = request.form.get("cardid")
     receiver = request.form.get("receiver")
-    giftMethod = int(request.form.get("giftMethod"))
+    receiver_email = request.form.get("receiver_email")
+    giftMethod = request.form.get("giftMethod")
     # connect and open the database file database.db
     conn = sqlite3.connect('database.db')
     conn.execute(f"INSERT INTO wish (cardid,sender,receiver,message) VALUES ('{cardid}','{sender}', '{receiver}', '{message}')")
@@ -58,13 +58,14 @@ def wish_insert():
     conn.commit()
     # close the connection
     conn.close()
-    requests.post(
-		"https://api.mailgun.net/v3/sandbox784cba45b781488ba33c9e360d748f81.mailgun.org/messages",
-		auth=("api", "974657a9f33213abf6e8967aab10f197-8d821f0c-bf8e029f"),
-		data={"from": "ARMonster@armonster.com",
-			"to": receiver_email,
-			"subject": "Hello",
-			"text": message})
+    if(giftMethod == "Email"):
+        requests.post(
+            "https://api.mailgun.net/v3/sandbox784cba45b781488ba33c9e360d748f81.mailgun.org/messages",
+            auth=("api", key.API),
+            data={"from": "ARMonster@armonster.com",
+                "to": receiver_email,
+                "subject": "Hello",
+                "text": message})
             
     return render_template('wish_confirmation.html')
 
@@ -78,12 +79,6 @@ def staff_list():
     conn.close()
     return render_template('staff.html', staff_list = staff_list)
 
-@app.route('/error')
-def error():
-    sender = request.form.get("sender")
-    message = request.form.get("message")
-    receiver = request.form.get("receiver")
-    if(sender == None or message == None or receiver == None):
-        return render_template("error.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
