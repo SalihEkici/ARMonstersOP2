@@ -1,4 +1,86 @@
-img{
-    max-width: 100%;
-    height: auto;
+
+h1 {font-size:50px;}
+h2{font-size:45px;}
+p{font-size:20px;}
+
+
+.container {
+    padding-bottom: 20px 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#carousel{
+    border: 3px solid beige;
+    border-radius: 20px;
+}
+#carousel img{
+    border-radius: 20px;
+}
+.card-img-top {
+    object-fit: cover;
+}
+
+#unique_code_box{
+    margin-top: 100px;
+}
+
+footer{
+    margin-top: auto;
+}
+.button1 {
+    font-weight: 700;
+    border: none;
+    background-color:green;
+    border-radius: 12px;;
+    padding: 8px 15px; 
+    text-decoration: none;
+}
+
+.button1 a{
+    color: white!important;
+}
+
+
+.card {
+
+    justify-content: center;
+    background-color: aliceblue;
+}
+
+
+.half-of-section {
+    width: 50%;
+    margin-left: 5%;
+}
+
+.half-of-section img {
+    width: 80%;
+
+}
+
+
+
+
+div {
+    padding-bottom: 15px;
+}
+
+.carousel-indicators li {
+    width: 12px;
+    height: 9px;
+    background-color: cacaca;
+    border-radius: 46%;
+
+
+}
+
+
+.carousel-indicators .active {
+    opacity: 1;
+    width: 32px;
+    height: 9px;
+    background-image: linear-gradient(45deg, #fdc21f, #fcc87a);
+    border-radius: 44%;
+    transition: 8s;
 }

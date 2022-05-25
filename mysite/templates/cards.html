@@ -8,24 +8,28 @@
 
     <hr />
 
-    <p>Please select one of our fancy AR cards:</p>
+    <p class="text-center">Please select one of our (mostly) monster themed AR cards and watch your loved one have immense joy!</p>
 
-    <p>
+
     <!-- Create a div-tag for every card in the cards collection -->
     <div class="container">  
-        <h1>Cards</h1>
-        <p>Scan the card with Zappar to see a special animation</p>
-        <div class="d-flex flex-column ">
+        <h1 class="text-center">Cards</h1>
+        <p class="text-center">Scan the card with Zappar to see a special animation</p>
+        <div class="d-flex flex-md-colum flex-lg-row flex-wrap ">
             {% for card in cards %}
             <!-- Show the title for every card -->
-            <div class="card">
+            <div class="card d-flex flex-column align-content-between m-2" style="width: 18rem;">
                 <img src="../static/img/card-pictures/{{card['title']}} zappar.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                <div>{{ card['title'] }}</div>        
-            </div>
-            </div>
+                <div class="card-body d-flex flex-column b-0">
+                    <a href="wish" class="btn btn-primary mt-auto">{{ card['title'] }}</a>
+                </div>
+              </div>
+              <video width="200" height="288px" controls>
+                <source src="../static/img/video/{{card['title']}}.mp4">
+            </video>
+            
             {% endfor %}   
         </div>
     </div>
-    </p>
+
 {% endblock %}

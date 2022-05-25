@@ -7,7 +7,7 @@
 <h1>Wishes</h1>
 <div>
     {%for wish in wishes%}
-    <p>Card ID:  {{wish['cardid']}} <br> Message:  {{wish['message']}} <br> Sender: {{wish['sender']}} <br>Sent to:  {{wish['receiver']}}</p>
+    <p>Card ID:  {{wish['cardid']}} <br> Message:  {{wish['message']}} <br> Sender: {{wish['sender']}} <br>Sent to:  {{wish['receiver']}} <br>Unique code: {{wish['code']}}</p>
     {% endfor %}
 </div>
 {% endblock %}

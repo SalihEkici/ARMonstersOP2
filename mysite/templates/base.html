@@ -7,19 +7,20 @@
     <link rel="stylesheet" href="../static/style.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+   
     <title>{% block title %} {% endblock %}</title>
   </head>
   <body>
+    <div class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <a class="navbar-brand">Thomas More Kempen</a>
+        <a class="navbar-brand" href="/"><img src="../static/img/logo.png" alt="..." height="100" width="100"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-            <li class="nav-item active">
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
                 <a class="nav-link" href="/">home</a>
             </li>
             <li class="nav-item">
@@ -39,13 +40,70 @@
             </ul>
         </div>
     </nav>
-    <div class="container">
+    <div class="container p-3">
         {% block content %}
-    
-        <h3><a href="unique_code">Click here to enter your unique code</a></h3>
+        <div id="carousel" class="container p-3">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <h1>Life with AR</h1>
+                      <p>Have you ever played Pokemon GO? Have you ever thought about how cool the animations are?<br>Think about how cool it would be to send a gift card with the AR experience embedded in it!</p>
+                    </div>
+                    
+
+                    <div class="col-md-6">
+                      <img src="../static/img/carousel/pokemongo.png" class="d-block w-100" alt="..." height = "310px">
+                    </div>
+                  </div>
+        
+                </div>
+        
+                <div class="carousel-item">
+                  <div class="row align-items-center">
+                    <div class="col-md-6">
+                      <h1>Life with AR</h1>
+                      <p>We have dedicated our lives for the progress of AR gift cards! Join us in our journey to make ARMonsters inc. the  AR gift card company in the world!</p>
+        
+                      
+                    </div>
+                    <div class="col-md-6">
+                      <img src="../static/img/carousel/ar1.png" class="d-block w-100" alt="..." height="310px">
+                    </div>
+                  </div>
+        
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+          <p>To learn about AR click <a href="https://www.dummies.com/article/technology/programming-web-design/general-programming-web-design/virtual-augmented-reality-dummies-cheat-sheet-251732/">here</a> </p>
+        
+        <div class="d-flex flex-column">
+            <p>Have you received an AR giftcard from one of your loved ones? <br>Click on the button to enter the unique code for your personalized message!</p>
+            <button class="col-4 button1"  target="_blank"><a href="unique_code">Code</a></button>
+        </div>
+        
+
         {% endblock %}
     </div>
-
+</div>
+    <footer class="bg-light mt-auto" style="color: black;">       
+        <p>© 2021-2022 AR Mosters All Rights Reserved. Thomas More Hogeschool</p>
+    </footer>
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

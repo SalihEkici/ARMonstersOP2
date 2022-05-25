@@ -19,8 +19,12 @@ print("Table card created successfully")
 # insert four rows in the newly created table
 conn.execute("INSERT INTO card (title) VALUES ('Yoda Happy Birthday')")
 conn.execute("INSERT INTO card (title) VALUES ('Shrek Happy Birthday')")
+conn.execute("INSERT INTO card (title) VALUES ('Happy Halloween')")
 conn.execute("INSERT INTO card (title) VALUES ('Merry Christmas')")
 conn.execute("INSERT INTO card (title) VALUES ('Spongebob Christmas')")
+conn.execute("INSERT INTO card (title) VALUES ('Valentines Day')")
+conn.execute("INSERT INTO card (title) VALUES ('Santa Christmas')")
+conn.execute("INSERT INTO card (title) VALUES ('Halloween Castle')")
 
 print("Cards inserted successfully")
 # create a second table wish with four columns:

@@ -4,11 +4,17 @@
 <!-- Fill in the title -->
 {% block title %}Enter your unique code{% endblock %}
 {% block content %}
-<form action="get_card" method="post">
+<form id="unique_code_box" action="get_card" method="post">
     <div>
-        <label for="code">Enter your code:</label>
-        <input type="text" id="code" name="code">
-        <input type="submit" id="submit" name="submit" value="See message">
-    </div>
+        <p>
+            <label for="code">Enter your code:</label>
+        </p>
+        <p>
+            <input type="text" id="code" name="code">
+        </p>
+        <p>
+            <input type="submit" id="submit" name="submit" value="See message">
+        </p>
+        </div>
 </form>
 {% endblock %}

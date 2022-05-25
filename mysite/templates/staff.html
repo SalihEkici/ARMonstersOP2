@@ -6,8 +6,10 @@
 {% block content %}
 <h1>Here is our staff:</h1>
 <h3>Scan the business cards with Zappar for extra info!</h3>
+<div class="container p-3 d-flex flex-column">
 {% for staff in staff_list%}
 <p>Name: {{staff["fullName"]}}</p>
-<img src="../static/img/business-cards/{{staff['fullName']}}.png" alt="business-cards">
+<img src="../static/img/business-cards/{{staff['fullName']}}.png" alt="business-cards" width="400" height="200">
 {% endfor %}
+</div>
 {% endblock %}
