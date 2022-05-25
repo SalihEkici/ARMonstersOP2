@@ -16,14 +16,13 @@ conn.execute("DROP TABLE IF EXISTS staff")
 # the second column contains the card title
 conn.execute('CREATE TABLE card (cardid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title TEXT)')
 print("Table card created successfully")
-
 # insert four rows in the newly created table
-conn.execute("INSERT INTO card (title) VALUES ('Happy birthday')")
-conn.execute("INSERT INTO card (title) VALUES ('A very big thank you')")
-conn.execute("INSERT INTO card (title) VALUES ('Graduation party')")
-conn.execute("INSERT INTO card (title) VALUES ('Happy Retirement')")
-print("Cards inserted successfully")
+conn.execute("INSERT INTO card (title) VALUES ('Yoda Happy Birthday')")
+conn.execute("INSERT INTO card (title) VALUES ('Shrek Happy Birthday')")
+conn.execute("INSERT INTO card (title) VALUES ('Merry Christmas')")
+conn.execute("INSERT INTO card (title) VALUES ('Spongebob Christmas')")
 
+print("Cards inserted successfully")
 # create a second table wish with four columns:
 # the first column wishid is the primary key and autoincrement
 # the second column contains the sender of the wishes
@@ -34,9 +33,11 @@ conn.execute('CREATE TABLE wish (wishid INTEGER PRIMARY KEY AUTOINCREMENT NOT NU
 print("Table wish created successfully")
 
 conn.execute("CREATE TABLE staff (staffid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, fullName TEXT, email TEXT, github TEXT)")
-conn.execute('INSERT INTO staff (fullName,email,github) VALUES("Salih Ekici","r0883622@student.thomasmore.be","https://github.com/SalihEkici")')
-conn.execute('INSERT INTO staff (fullName,email,github) VALUES("Kyano Trevisan","r0894962@student.thomasmore.be","https://github.com/kyanoTrevisan/")')
-# commit all changes to the database, otherwise they will be lost
+conn.execute('INSERT INTO staff (fullName) VALUES("Salih Ekici")')
+conn.execute('INSERT INTO staff (fullName) VALUES("Kyano Trevisan")')
+conn.execute('INSERT INTO staff (fullName) VALUES("Mohamed Ajimi")')
+conn.execute('INSERT INTO staff (fullName) VALUES("MD Tareq Aziz")')
+# commit all changes to the database, othrwise they will be lost
 conn.commit()
 
 # close the connection

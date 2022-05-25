@@ -12,19 +12,16 @@
 
     <p>
     <!-- Create a div-tag for every card in the cards collection -->
-    <div class="container">
-    
-      
+    <div class="container">  
         <h1>Cards</h1>
+        <p>Scan the card with Zappar to see a special animation</p>
         <div class="d-flex flex-column ">
             {% for card in cards %}
             <!-- Show the title for every card -->
             <div class="card">
-                <img src="../static/img/card-pictures/gift-card.jpg" class="card-img-top" alt="...">
+                <img src="../static/img/card-pictures/{{card['title']}} zappar.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                <div>{{ card['title'] }}</div>
-                
-                <p class="card-text">this is a card</p>
+                <div>{{ card['title'] }}</div>        
             </div>
             </div>
             {% endfor %}   

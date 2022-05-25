@@ -4,9 +4,8 @@
 <!-- Fill in the title -->
 {% block title %} Message {% endblock %}
 
-
 {% block content %}
-<h1>You have a personalized message from {{sender['sender']}}</h1>
+<h1>Print the Message and Giftcard</h1>
 <p>{{message['message']}}</p>
-<img src="../static/img/card-pictures/{{giftcard}} zappar.png" alt="...">
+<img src="../static/img/card-pictures/{{image['title']}} zappar.png" alt="zappar card">
 {% endblock %}

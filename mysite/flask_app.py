@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('base.html')
 
 def dict_factory(cursor, row):
     d = {}
@@ -62,22 +62,30 @@ def wish_insert():
     conn.execute(f"INSERT INTO wish (cardid,sender,receiver,message,code) VALUES ('{cardid}','{sender}', '{receiver}', '{message}','{random_access_code}')")
     # commit the new row to the database, otherwise it will be lost
     conn.commit()
-    # close the connection
-    conn.close()
-    
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+    image = cur.execute("SELECT title from card where cardid = '" + cardid + "'").fetchone()
     
     #send email with data from form
-    if giftMethod == "2":    
+    if(giftMethod == "2"): 
         requests.post(
             "https://api.mailgun.net/v3/sandbox6f8b2699467b4c70822f3693c7ac5877.mailgun.org/messages",
             auth=("api", "5d0ae248efa80711e3d556146a12376d-8d821f0c-4fc5a289"),
             data={"from": "salih@ARMonsters.mailgun.com",
-            "to": receiver_email,
+            "to": f"{receiver_email}",
             "subject": "You have received a greeting card from " + sender ,
             "text": message + "\nAccess code = " + random_access_code})
-
-
-    return render_template('wish_confirmation.html')
+        return render_template('wish_confirmation.html')
+    else:
+        
+        
+        # close the connection
+        conn.close()
+        print(message)
+        print(image)
+        return render_template('print_wish.html', message = message, image = image)
+    
+    
 
 @app.route('/staff')
 def staff_list():
@@ -95,13 +103,18 @@ def unique_code():
 
 @app.route('/get_card', methods=['POST'])
 def show_message():
-    unique_code = request.form.get("unique_code")
+    unique_code = request.form.get("code")
     conn = sqlite3.connect('database.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
-    message = cur.execute(f"SELECT message from wish where '{unique_code}' = code")
+    message = cur.execute("SELECT message from wish where code = '" + unique_code + "'").fetchone()
+    sender = cur.execute("SELECT sender from wish where code = '" + unique_code + "'").fetchone()
     conn.commit()
-    conn.close()
-    return render_template("message.html", unique_code = unique_code, message = message)
+    print(message)
+    print(unique_code)
+    if message == None:
+        return render_template("error.html") 
+    conn.close()    
+    return render_template("message.html", unique_code = unique_code, message = message,sender = sender)
 if __name__ == "__main__":
     app.run(debug=True)

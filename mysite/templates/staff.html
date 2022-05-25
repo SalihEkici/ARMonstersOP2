@@ -5,7 +5,9 @@
 {% block title %} Our Staff {% endblock %}
 {% block content %}
 <h1>Here is our staff:</h1>
+<h3>Scan the business cards with Zappar for extra info!</h3>
 {% for staff in staff_list%}
-<p>Name: {{staff["fullName"]}} <br> Email: {{staff["email"]}} <br> Github: {{staff["github"]}}</p>
+<p>Name: {{staff["fullName"]}}</p>
+<img src="../static/img/business-cards/{{staff['fullName']}}.png" alt="business-cards">
 {% endfor %}
 {% endblock %}
